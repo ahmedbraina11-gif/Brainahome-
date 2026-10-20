@@ -1,0 +1,39 @@
+{
+  "dir": "ltr",
+  "meta": { "title": "Braina Home | Ölçüye özel mobilya ve iç mekan dolapları", "desc": "Braina Home salon, yatak odası, çocuk odası, mutfak ve gardırobu ölçüye göre üretir. WhatsApp ile yazın." },
+  "nav": { "about": "Hakkımızda", "gallery": "Çalışmalarımız", "contact": "İletişim" },
+  "hero": {
+    "title": "Evin her odası için ölçüye özel mobilya",
+    "text": "Salon, yatak odası, çocuk odası, mutfak ve gardırobu mekânınıza ve zevkinize göre tasarlıyor, üretiyoruz.",
+    "wa": "WhatsApp'tan yazın",
+    "gallery": "Çalışmaları gör"
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "text": "Braina Home, İstanbul'da bir mobilya atölyesi ve showroom. Fikrinizden ve mekânın ölçülerinden yola çıkar, her parçayı seçilmiş malzeme ve temiz bir işçilikle üretiriz.",
+    "list_title": "Neler üretiyoruz",
+    "items": ["Salon ve TV üniteleri", "Yatak odaları", "Çocuk ve genç odaları", "Mutfaklar", "Gardırop ve giyinme odaları", "Koridor ve aynalar", "Şömine duvarları"]
+  },
+  "gallery": {
+    "title": "Fotoğraf albümleri",
+    "empty": "Fotoğraflar ekleniyor.",
+    "albums": "Albümler"
+  },
+  "lightbox": { "close": "Kapat", "prev": "Önceki", "next": "Sonraki" },
+  "contact": {
+    "title": "İletişim",
+    "address_title": "Adres",
+    "address": "Altınşehir Mahallesi, Canberk Sokak No: 21/A, Ümraniye / İstanbul",
+    "map": "Haritada aç",
+    "phones_title": "WhatsApp",
+    "main": "Ana numara",
+    "second": "İkinci numara",
+    "third": "Üçüncü numara",
+    "chat": "Sohbet başlat",
+    "email_title": "E-posta",
+    "web_title": "Web sitesi"
+  },
+  "wa": { "message": "Merhaba Braina Home, mobilyalarınız hakkında bilgi almak istiyorum." },
+  "footer": { "rights": "Tüm hakları saklıdır" },
+  "floating": { "wa": "WhatsApp" }
+}

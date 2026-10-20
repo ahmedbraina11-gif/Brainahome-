@@ -1,0 +1,11 @@
+{
+  "brand": "Braina Home",
+  "website": "www.brainahome.com",
+  "email": "info@brainahome.com",
+  "phones": [
+    { "key": "main",   "display": "+90 539 650 64 56", "wa": "905396506456" },
+    { "key": "second", "display": "+90 545 336 06 91", "wa": "905453360691" },
+    { "key": "third",  "display": "+90 555 101 80 00", "wa": "905551018000" }
+  ],
+  "mapQuery": "Altınşehir Mahallesi Canberk Sokak 21/A Ümraniye İstanbul"
+}

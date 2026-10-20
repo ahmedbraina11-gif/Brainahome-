@@ -1,0 +1,8 @@
+[
+  { "id": "living-room", "title": { "ar": "صالات", "en": "Living rooms", "tr": "Salonlar" } },
+  { "id": "bedrooms",    "title": { "ar": "غرف نوم", "en": "Bedrooms", "tr": "Yatak odaları" } },
+  { "id": "kids",        "title": { "ar": "غرف أطفال وشباب", "en": "Kids and youth rooms", "tr": "Çocuk ve genç odaları" } },
+  { "id": "kitchens",    "title": { "ar": "مطابخ", "en": "Kitchens", "tr": "Mutfaklar" } },
+  { "id": "corridor",    "title": { "ar": "كريدور", "en": "Corridors", "tr": "Koridor" } },
+  { "id": "our-works",   "title": { "ar": "أعمالنا", "en": "Our works", "tr": "Çalışmalarımız" } }
+]

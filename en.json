@@ -1,0 +1,39 @@
+{
+  "dir": "ltr",
+  "meta": { "title": "Braina Home | Custom furniture and interior woodwork", "desc": "Braina Home builds living rooms, bedrooms, kids rooms, kitchens and wardrobes to measure. Message us on WhatsApp." },
+  "nav": { "about": "About", "gallery": "Our works", "contact": "Contact" },
+  "hero": {
+    "title": "Furniture made to measure for every room",
+    "text": "We design and build living rooms, bedrooms, kids rooms, kitchens and wardrobes to fit your space and your taste.",
+    "wa": "Message us on WhatsApp",
+    "gallery": "See our works"
+  },
+  "about": {
+    "title": "About us",
+    "text": "Braina Home is a furniture workshop and showroom in Istanbul. We start from your idea and the measurements of the space, then build each piece with chosen materials and a clean finish.",
+    "list_title": "What we build",
+    "items": ["Living rooms and TV walls", "Bedrooms", "Kids and youth rooms", "Kitchens", "Wardrobes and dressing rooms", "Corridors and mirrors", "Fireplace walls"]
+  },
+  "gallery": {
+    "title": "Photo albums",
+    "empty": "Photos are being added.",
+    "albums": "Albums"
+  },
+  "lightbox": { "close": "Close", "prev": "Previous", "next": "Next" },
+  "contact": {
+    "title": "Contact us",
+    "address_title": "Address",
+    "address": "21/A Canberk Street, Altınşehir Neighborhood, Ümraniye, Istanbul",
+    "map": "Open in Maps",
+    "phones_title": "WhatsApp",
+    "main": "Main number",
+    "second": "Second number",
+    "third": "Third number",
+    "chat": "Start a chat",
+    "email_title": "Email",
+    "web_title": "Website"
+  },
+  "wa": { "message": "Hello Braina Home, I would like to ask about your furniture." },
+  "footer": { "rights": "All rights reserved" },
+  "floating": { "wa": "WhatsApp" }
+}
