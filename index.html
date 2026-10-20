@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Braina Home | الأثاث والتصاميم الفاخرة</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emeraldBg: {
+              950: '#041610',
+              900: '#062419',
+              800: '#0a3223',
+              700: '#114a35',
+            },
+            roseGold: {
+              200: '#f9f1e1',
+              300: '#f3e3a2',
+              400: '#e5c158',
+              500: '#d4af37',
+              600: '#c5a059',
+              700: '#b38f2a'
+            },
+            marbleTexture: {
+              100: '#fbf9f5',
+              200: '#f2eee5',
+              800: '#14201b'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Cairo"', '"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #041610;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c5a059;
+      border-radius: 4px;
+    }
+
+    /* Metallic Gold Gradient Text */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #F9F1E1 0%, #D4AF37 45%, #E5C158 70%, #B38F2A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Velvet and Marble Gradients */
+    .velvet-bg {
+      background: radial-gradient(circle at center, #0a3223 0%, #041610 100%);
+    }
+
+    /* Marble CSS Pattern Background */
+    .calacatta-marble-bg {
+      background-color: #062419;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(212, 175, 55, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.03) 0px, transparent 80%);
+    }
+
+    .marble-card {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(10, 50, 35, 0.4) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .marble-card:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.25);
+    }
+
+    * {
+      transition: all 0.25s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-emeraldBg-950 text-gray-100 font-sans antialiased selection:bg-roseGold-500 selection:text-emeraldBg-950">
+
+  <!-- TOP HEADER -->
+  <header class="bg-emeraldBg-900 border-b border-roseGold-500/20 text-xs sm:text-sm py-2 px-4 sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      
+      <!-- Direct Contact Links -->
+      <div class="flex items-center space-x-4 space-x-reverse text-gray-300">
+        <a href="tel:+905396506456" class="hover:text-roseGold-400 flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-phone text-roseGold-500 text-xs"></i>
+          <span dir="ltr">+90 539 650 64 56</span>
+        </a>
+        <span class="text-roseGold-500/30">|</span>
+        <a href="mailto:info@brainahome.com" class="hover:text-roseGold-400 hidden sm:flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-envelope text-roseGold-500 text-xs"></i>
+          <span>info@brainahome.com</span>
+        </a>
+      </div>
+
+      <!-- Action Buttons & Language Switcher -->
+      <div class="flex items-center space-x-2 space-x-reverse">
+        
+        <!-- Installation Guide Modal Trigger -->
+        <button onclick="toggleModal('installGuideModal')" class="bg-roseGold-500/10 hover:bg-roseGold-500/20 text-roseGold-300 border border-roseGold-500/30 text-xs px-2.5 py-1 rounded-lg flex items-center gap-1">
+          <i class="fa-solid fa-cloud-arrow-up text-roseGold-400"></i>
+          <span data-i18n="installGuideBtn">خطوات التنصيب والنشر</span>
+        </button>
+
+        <!-- Dynamic Image Manager Trigger -->
+        <button onclick="toggleModal('imageManagerModal')" class="bg-roseGold-500/10 hover:bg-roseGold-500/20 text-roseGold-300 border border-roseGold-500/30 text-xs px-2.5 py-1 rounded-lg flex items-center gap-1">
+          <i class="fa-solid fa-images text-roseGold-400"></i>
+          <span data-i18n="editImagesBtn">إدارة الصور</span>
+        </button>
+
+        <span class="text-roseGold-500/30">|</span>
+
+        <!-- Language Switcher -->
+        <div class="flex items-center space-x-1 space-x-reverse bg-emeraldBg-950 p-1 rounded-lg border border-roseGold-500/30">
+          <button onclick="changeLanguage('ar')" id="lang-ar" class="px-2 py-0.5 rounded text-xs font-bold text-roseGold-400 bg-emeraldBg-800">العربية</button>
+          <button onclick="changeLanguage('en')" id="lang-en" class="px-2 py-0.5 rounded text-xs font-bold text-gray-300 hover:text-roseGold-400">EN</button>
+          <button onclick="changeLanguage('tr')" id="lang-tr" class="px-2 py-0.5 rounded text-xs font-bold text-gray-300 hover:text-roseGold-400">TR</button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="bg-emeraldBg-950/90 border-b border-roseGold-500/20 backdrop-blur-md sticky top-10 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-24">
+        
+        <!-- BRAINA HOME LUXURY LOGO WITH MARBLE TEXTURE -->
+        <a href="#" class="flex items-center gap-3.5 group py-2">
+          
+          <!-- Logo Shield Container -->
+          <div class="relative w-16 h-16 rounded-xl p-0.5 bg-gradient-to-tr from-roseGold-600 via-roseGold-300 to-roseGold-500 flex items-center justify-center shadow-2xl group-hover:scale-105 transition duration-300 overflow-hidden">
+            
+            <!-- SVG Logo Canvas with Marble Pattern Background -->
+            <svg class="w-full h-full rounded-xl" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Calacatta Marble Texture Fill -->
+              <rect width="120" height="120" fill="url(#marblePattern)" />
+              
+              <!-- Subtle Dark Marble Overlay for Contrast -->
+              <rect width="120" height="120" fill="#041610" fill-opacity="0.65" />
+
+              <!-- Outer Golden Arch Frame -->
+              <path d="M 22 105 V 42 A 38 38 0 0 1 98 42 V 105" stroke="url(#goldGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+              <!-- Interlocked 'BH' Monogram Artwork -->
+              <text x="60" y="58" font-family="'Playfair Display', serif" font-weight="900" font-size="34" fill="url(#goldGradient)" text-anchor="middle" letter-spacing="1">BH</text>
+              
+              <!-- Ornate Sofa Silhouette -->
+              <path d="M 30 75 C 30 67 38 64 60 64 C 82 64 90 67 90 75 C 90 82 85 84 60 84 C 35 84 30 82 30 75 Z" fill="url(#goldGradient)"/>
+              <path d="M 24 70 C 20 70 18 75 20 80 C 22 85 26 85 28 80 C 28 75 26 70 24 70 Z" fill="url(#goldGradient)"/>
+              <path d="M 96 70 C 100 70 102 75 100 80 C 98 85 94 85 92 80 C 92 75 94 70 96 70 Z" fill="url(#goldGradient)"/>
+
+              <!-- Gradient Defs -->
+              <defs>
+                <!-- Marble Pattern Gradient -->
+                <radialGradient id="marblePattern" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#F2EEE5" />
+                  <stop offset="50%" stop-color="#D4AF37" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#062419" />
+                </radialGradient>
+                <!-- Metallic Gold Metallic Specular -->
+                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#F9F1E1" />
+                  <stop offset="40%" stop-color="#D4AF37" />
+                  <stop offset="70%" stop-color="#E5C158" />
+                  <stop offset="100%" stop-color="#B38F2A" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+          </div>
+
+          <!-- Brand Typography -->
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-extrabold tracking-wider gold-gradient-text">BRAINA</span>
+            <span class="text-[10px] tracking-[0.4em] text-roseGold-300 uppercase font-light -mt-1">HOME</span>
+          </div>
+        </a>
+
+        <!-- Desktop Menu Links -->
+        <div class="hidden md:flex items-center space-x-8 space-x-reverse font-medium text-sm">
+          <a href="#hero" class="hover:text-roseGold-400 text-gray-200 transition" data-i18n="navHome">الرئيسية</a>
+          <a href="#about" class="hover:text-roseGold-400 text-gray-200 transition" data-i18n="navAbout">عن Braina Home</a>
+          <a href="#collections" class="hover:text-roseGold-400 text-gray-200 transition" data-i18n="navCollections">التشكيلات</a>
+          <a href="#location" class="hover:text-roseGold-400 text-gray-200 transition" data-i18n="navLocation">موقعنا</a>
+          <a href="#contact" class="hover:text-roseGold-400 text-gray-200 transition" data-i18n="navContact">تواصل معنا</a>
+        </div>
+
+        <!-- WhatsApp CTA Button -->
+        <div class="hidden sm:block">
+          <button onclick="openWhatsApp('905396506456')" class="bg-gradient-to-r from-roseGold-500 to-roseGold-600 hover:from-roseGold-400 hover:to-roseGold-500 text-emeraldBg-950 font-bold px-5 py-2.5 rounded-xl shadow-lg flex items-center gap-2 transform hover:-translate-y-0.5 transition duration-200">
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span data-i18n="ctaConsult">استشارة واتساب</span>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden flex items-center">
+          <button onclick="toggleMobileMenu()" class="text-roseGold-400 p-2 focus:outline-none">
+            <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-emeraldBg-900 border-b border-roseGold-500/20 px-4 pt-2 pb-6 space-y-3">
+      <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-roseGold-400" data-i18n="navHome">الرئيسية</a>
+      <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-roseGold-400" data-i18n="navAbout">عن Braina Home</a>
+      <a href="#collections" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-roseGold-400" data-i18n="navCollections">التشكيلات</a>
+      <a href="#location" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-roseGold-400" data-i18n="navLocation">موقعنا</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-roseGold-400" data-i18n="navContact">تواصل معنا</a>
+      <button onclick="openWhatsApp('905396506456')" class="w-full mt-3 bg-roseGold-500 text-emeraldBg-950 font-bold py-2.5 rounded-xl flex items-center justify-center gap-2">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span data-i18n="ctaConsult">استشارة واتساب</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION WITH EMERALD VELVET & MARBLE ATMOSPHERE -->
+  <section id="hero" class="relative min-h-[88vh] flex items-center justify-center overflow-hidden calacatta-marble-bg border-b border-roseGold-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+      
+      <!-- Hero Text Content -->
+      <div class="space-y-6 text-center md:text-right">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-roseGold-500/10 border border-roseGold-500/30 text-roseGold-400 text-xs sm:text-sm font-medium">
+          <i class="fa-solid fa-crown text-roseGold-400"></i>
+          <span data-i18n="heroBadge">الفخامة والأناقة لبيتك الفاخر</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight">
+          <span data-i18n="heroTitleLine1">تصاميم استثنائية من</span><br>
+          <span class="gold-gradient-text" data-i18n="heroTitleLine2">BRAINA HOME</span>
+        </h1>
+
+        <p class="text-gray-300 text-base sm:text-lg max-w-xl leading-relaxed font-light" data-i18n="heroDescription">
+          نقدم قطعاً فنية راقية تصمم خصيصاً لتناسب ذوقك الرفيع، مع أجود الخامات المخملية واللمسات الذهبية المتقنة على أسطح الرخام الفاخر.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-4">
+          <a href="#collections" class="bg-gradient-to-r from-roseGold-500 to-roseGold-600 hover:from-roseGold-400 hover:to-roseGold-500 text-emeraldBg-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:shadow-roseGold-500/20 transform hover:-translate-y-1 transition duration-200" data-i18n="btnExplore">
+            استكشف المجموعة
+          </a>
+          <button onclick="openWhatsApp('905396506456')" class="border border-roseGold-500/50 hover:bg-roseGold-500/10 text-roseGold-300 font-semibold px-6 py-3.5 rounded-xl flex items-center gap-2 transition">
+            <i class="fa-brands fa-whatsapp text-lg text-emerald-400"></i>
+            <span data-i18n="btnOrderDirect">تواصل مباشر</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Featured Furniture Image Container -->
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-roseGold-500 via-roseGold-300 to-emerald-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500"></div>
+        <div class="relative rounded-2xl overflow-hidden border border-roseGold-500/40 bg-emeraldBg-900 shadow-2xl">
+          <img id="heroImage" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80" alt="Braina Home Luxury Design" class="w-full h-[380px] sm:h-[460px] object-cover hover:scale-105 transition duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-emeraldBg-950 via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-6 right-6 left-6 p-4 rounded-xl marble-card">
+            <p class="text-xs text-roseGold-400 uppercase tracking-widest font-semibold" data-i18n="heroImageTag">مجموعة صالونات 2026</p>
+            <p class="text-base font-serif text-white font-medium" data-i18n="heroImageCaption">طقم أريكة مخملية فاخرة مع تشطيبات مذهبة</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BRAND IDENTITY SECTION -->
+  <section id="about" class="py-20 velvet-bg relative border-b border-roseGold-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Large Marble Crest Badge -->
+        <div class="flex justify-center">
+          <div class="relative p-8 rounded-3xl marble-card shadow-2xl max-w-md w-full text-center">
+            
+            <div class="w-36 h-36 mx-auto mb-6 rounded-2xl p-1 bg-gradient-to-b from-roseGold-300 via-roseGold-500 to-roseGold-700 flex items-center justify-center shadow-inner overflow-hidden">
+              <div class="w-full h-full rounded-2xl bg-emeraldBg-950 flex flex-col items-center justify-center p-3 relative">
+                
+                <!-- Inner Crest Artwork -->
+                <svg class="w-20 h-20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 20 85 V 35 A 30 30 0 0 1 80 35 V 85" stroke="#D4AF37" stroke-width="3" fill="none"/>
+                  <text x="50" y="48" font-family="'Playfair Display', serif" font-weight="900" font-size="28" fill="#D4AF37" text-anchor="middle">BH</text>
+                  <path d="M 25 65 C 25 58 35 55 50 55 C 65 55 75 58 75 65 C 75 72 70 74 50 74 C 30 74 25 72 25 65 Z" fill="#D4AF37"/>
+                </svg>
+              </div>
+            </div>
+
+            <h3 class="text-3xl font-serif font-extrabold gold-gradient-text tracking-wider mb-1">BRAINA HOME</h3>
+            <div class="h-0.5 w-16 bg-roseGold-500/50 mx-auto my-4"></div>
+            <p class="text-xs text-gray-300 italic" data-i18n="brandMotto">"إبداع التصاميم الفاخرة التي تحول مساحاتك إلى تحفة فنية"</p>
+          </div>
+        </div>
+
+        <!-- About Text -->
+        <div class="space-y-6">
+          <div class="inline-block px-3 py-1 rounded bg-roseGold-500/10 text-roseGold-400 text-xs font-semibold uppercase tracking-wider" data-i18n="aboutSub">علامة الفخامة</div>
+          <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white leading-snug" data-i18n="aboutTitle">
+            عراقة الذوق ودقة التفاصيل
+          </h2>
+          <p class="text-gray-300 leading-relaxed" data-i18n="aboutText1">
+            نحن في Braina Home نبتكر أحدث التصاميم العالمية برؤية فاخرة تدمج بين الجودة العالية واللمسات العصرية لتلبية تطلعات من يبحثون عن التميز والراحة.
+          </p>
+          <p class="text-gray-300 leading-relaxed" data-i18n="aboutText2">
+            نعتمد في جميع مجموعاتنا على الأنسجة الراقية كالمخمل والأخشاب الصلبة وأسطح الرخام الفاخرة مع اهتمام دقيق بالتشطيبات الذهبية المصقولة التي تضفي بهاءً استثنائياً.
+          </p>
+
+          <!-- Features Cards -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-roseGold-500/20">
+            <div class="text-center p-3 rounded-xl bg-emeraldBg-950/60 border border-roseGold-500/20">
+              <i class="fa-solid fa-gem text-roseGold-400 text-xl mb-1"></i>
+              <p class="text-xs font-semibold text-gray-200" data-i18n="feat1">جودة فائقة</p>
+            </div>
+            <div class="text-center p-3 rounded-xl bg-emeraldBg-950/60 border border-roseGold-500/20">
+              <i class="fa-solid fa-wand-magic-sparkles text-roseGold-400 text-xl mb-1"></i>
+              <p class="text-xs font-semibold text-gray-200" data-i18n="feat2">تصاميم خاصة</p>
+            </div>
+            <div class="text-center p-3 rounded-xl bg-emeraldBg-950/60 border border-roseGold-500/20">
+              <i class="fa-solid fa-truck-fast text-roseGold-400 text-xl mb-1"></i>
+              <p class="text-xs font-semibold text-gray-200" data-i18n="feat3">شحن وتوصيل</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS & COLLECTIONS SECTION -->
+  <section id="collections" class="py-20 calacatta-marble-bg border-b border-roseGold-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold gold-gradient-text mb-4" data-i18n="catTitle">تشكيلاتنا المتميزة</h2>
+        <p class="text-gray-300 text-sm sm:text-base" data-i18n="catDesc">استكشف أفخم المجموعات المصممة لتضفي رونقاً خاصاً على منزلك</p>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10">
+        <button onclick="filterProducts('all')" id="tab-all" class="filter-tab px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-roseGold-500 text-emeraldBg-950 shadow-md">الكل</button>
+        <button onclick="filterProducts('living')" id="tab-living" class="filter-tab px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-emeraldBg-900/80 text-gray-300 border border-roseGold-500/30 hover:text-roseGold-400">أطقم صالون</button>
+        <button onclick="filterProducts('dining')" id="tab-dining" class="filter-tab px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-emeraldBg-900/80 text-gray-300 border border-roseGold-500/30 hover:text-roseGold-400">غرف سفرة</button>
+        <button onclick="filterProducts('bedroom')" id="tab-bedroom" class="filter-tab px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-emeraldBg-900/80 text-gray-300 border border-roseGold-500/30 hover:text-roseGold-400">غرف نوم</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="productsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Javascript dynamic render -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LOCATION & CONTACT SECTION -->
+  <section id="location" class="py-20 velvet-bg border-b border-roseGold-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold gold-gradient-text mb-3" data-i18n="locTitle">تفضل بزيارة معرضنا</h2>
+        <p class="text-gray-300 text-sm" data-i18n="locSub">يسعدنا استقبالكم في فرعنا للاطلاع على التشكيلات عن قرب</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        
+        <!-- Contact Cards & WhatsApp Direct Lines -->
+        <div class="bg-emeraldBg-950 p-8 rounded-2xl border border-roseGold-500/30 shadow-2xl space-y-6 marble-card">
+          <h3 class="text-2xl font-serif font-semibold text-white border-b border-roseGold-500/20 pb-4" data-i18n="contactInfo">معلومات التواصل والموقع</h3>
+          
+          <!-- Address -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-roseGold-500/10 border border-roseGold-500/30 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-location-dot text-roseGold-400"></i>
+            </div>
+            <div>
+              <h4 class="text-xs text-roseGold-400 uppercase font-semibold" data-i18n="addressLabel">العنوان الجغرافي</h4>
+              <p class="text-gray-200 text-sm mt-1 font-medium">Altınşehir mahallesi Canberk sokak 21/A</p>
+              <p class="text-gray-400 text-xs">Ümraniye / İstanbul - Türkiye</p>
+            </div>
+          </div>
+
+          <!-- Email & Web -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-roseGold-500/10 border border-roseGold-500/30 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-globe text-roseGold-400"></i>
+            </div>
+            <div>
+              <h4 class="text-xs text-roseGold-400 uppercase font-semibold" data-i18n="webEmailLabel">البريد والموقع الإلكتروني</h4>
+              <a href="mailto:info@brainahome.com" class="block text-gray-200 hover:text-roseGold-300 text-sm mt-1">info@brainahome.com</a>
+              <a href="https://www.brainahome.com" target="_blank" class="block text-roseGold-400 text-xs hover:underline mt-0.5">www.brainahome.com</a>
+            </div>
+          </div>
+
+          <!-- 3 WhatsApp Representatives with Pre-filled Greetings -->
+          <div class="pt-4 border-t border-roseGold-500/20">
+            <h4 class="text-xs text-roseGold-400 uppercase font-semibold mb-3" data-i18n="whatsappListTitle">ممثلو الخدمة المباشرة عبر واتساب</h4>
+            <div class="space-y-3">
+              
+              <!-- Number 1 -->
+              <button onclick="openWhatsApp('905396506456')" class="w-full flex items-center justify-between p-3.5 rounded-xl bg-emeraldBg-900/80 hover:bg-roseGold-500/10 border border-roseGold-500/30 transition group text-right">
+                <div class="flex items-center gap-3">
+                  <i class="fa-brands fa-whatsapp text-emerald-400 text-2xl"></i>
+                  <div>
+                    <span class="text-xs text-gray-400 block" data-i18n="num1Label">المبيعات الرئيسية</span>
+                    <span class="text-sm font-semibold text-gray-200 group-hover:text-roseGold-300" dir="ltr">+90 539 650 64 56</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-left text-xs text-roseGold-400 group-hover:-translate-x-1 transition"></i>
+              </button>
+
+              <!-- Number 2 -->
+              <button onclick="openWhatsApp('905453360691')" class="w-full flex items-center justify-between p-3.5 rounded-xl bg-emeraldBg-900/80 hover:bg-roseGold-500/10 border border-roseGold-500/30 transition group text-right">
+                <div class="flex items-center gap-3">
+                  <i class="fa-brands fa-whatsapp text-emerald-400 text-2xl"></i>
+                  <div>
+                    <span class="text-xs text-gray-400 block" data-i18n="num2Label">استشارات التصميم</span>
+                    <span class="text-sm font-semibold text-gray-200 group-hover:text-roseGold-300" dir="ltr">+90 545 336 06 91</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-left text-xs text-roseGold-400 group-hover:-translate-x-1 transition"></i>
+              </button>
+
+              <!-- Number 3 -->
+              <button onclick="openWhatsApp('905551018000')" class="w-full flex items-center justify-between p-3.5 rounded-xl bg-emeraldBg-900/80 hover:bg-roseGold-500/10 border border-roseGold-500/30 transition group text-right">
+                <div class="flex items-center gap-3">
+                  <i class="fa-brands fa-whatsapp text-emerald-400 text-2xl"></i>
+                  <div>
+                    <span class="text-xs text-gray-400 block" data-i18n="num3Label">خدمة العملاء</span>
+                    <span class="text-sm font-semibold text-gray-200 group-hover:text-roseGold-300" dir="ltr">+90 555 101 80 00</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-left text-xs text-roseGold-400 group-hover:-translate-x-1 transition"></i>
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Google Map Embed -->
+        <div class="h-full min-h-[420px] rounded-2xl overflow-hidden border border-roseGold-500/30 shadow-2xl relative">
+          <iframe 
+            class="w-full h-full min-h-[440px] filter grayscale opacity-90 hover:grayscale-0 transition duration-500"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.0211833777717!2d29.138800000000003!3d41.013500000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14aacd86eb792875%3A0x8ddf33e72c5780a8!2sAlt%C4%B1n%C5%9Fehir%20Mahallesi%2C%20Canberk%20Sk.%20No%3A21%2FA%2C%2034775%20%C3%9Cmraniye%2F%C4%B0stanbul!5e0!3m2!1sen!2str!4v1700000000000!5m2!1sen!2str" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact" class="bg-emeraldBg-950 border-t border-roseGold-500/20 pt-16 pb-8 text-sm text-gray-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-roseGold-500/10">
+        
+        <!-- Brand Summary -->
+        <div class="space-y-4 md:col-span-1">
+          <div class="flex items-center gap-2">
+            <span class="font-serif text-2xl font-bold gold-gradient-text">BRAINA</span>
+            <span class="text-xs text-roseGold-400 tracking-widest">HOME</span>
+          </div>
+          <p class="text-xs leading-relaxed text-gray-400" data-i18n="footerDesc">
+            علامة تجارية متخصصة في ابتكار أرقى تصاميم الأثاث المنزلي الفاخر والجودة العالية.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-white font-serif font-semibold mb-4 text-base" data-i18n="footerLinks">روابط السريعة</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#hero" class="hover:text-roseGold-400 transition" data-i18n="navHome">الرئيسية</a></li>
+            <li><a href="#about" class="hover:text-roseGold-400 transition" data-i18n="navAbout">عن Braina Home</a></li>
+            <li><a href="#collections" class="hover:text-roseGold-400 transition" data-i18n="navCollections">التشكيلات</a></li>
+            <li><a href="#location" class="hover:text-roseGold-400 transition" data-i18n="navLocation">موقعنا</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="text-white font-serif font-semibold mb-4 text-base" data-i18n="footerContact">معلومات التواصل</h4>
+          <ul class="space-y-2 text-xs">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-roseGold-400"></i> Altınşehir Mh. Canberk Sk. 21/A</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-roseGold-400"></i> info@brainahome.com</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-globe text-roseGold-400"></i> www.brainahome.com</li>
+          </ul>
+        </div>
+
+        <!-- Social & Admin Controls -->
+        <div>
+          <h4 class="text-white font-serif font-semibold mb-4 text-base" data-i18n="footerFollow">تابعنا</h4>
+          <div class="flex space-x-3 space-x-reverse mb-4">
+            <a href="#" class="w-8 h-8 rounded-full bg-emeraldBg-900 border border-roseGold-500/30 flex items-center justify-center text-roseGold-400 hover:bg-roseGold-500 hover:text-emeraldBg-950 transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-emeraldBg-900 border border-roseGold-500/30 flex items-center justify-center text-roseGold-400 hover:bg-roseGold-500 hover:text-emeraldBg-950 transition"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-emeraldBg-900 border border-roseGold-500/30 flex items-center justify-center text-roseGold-400 hover:bg-roseGold-500 hover:text-emeraldBg-950 transition"><i class="fa-brands fa-pinterest"></i></a>
+          </div>
+          <div class="space-y-1">
+            <button onclick="toggleModal('imageManagerModal')" class="text-xs text-roseGold-400 hover:underline block">
+              <i class="fa-solid fa-gear"></i> <span data-i18n="editImagesBtn">تعديل الصور مباشرة</span>
+            </button>
+            <button onclick="toggleModal('installGuideModal')" class="text-xs text-gray-400 hover:text-roseGold-400 hover:underline block">
+              <i class="fa-solid fa-circle-info"></i> <span data-i18n="installGuideBtn">خطوات التنصيب والنشر</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div class="pt-8 text-center text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <p>© 2026 Braina Home. جميع الحقوق محفوظة.</p>
+        <p class="text-roseGold-500/80">Designed with Emerald Velvet & Calacatta Gold</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON WITH SELECTION POPUP -->
+  <div class="fixed bottom-6 left-6 z-50">
+    <div id="whatsappPopup" class="hidden mb-3 bg-emeraldBg-900 border border-roseGold-500/40 p-4 rounded-2xl shadow-2xl w-72 space-y-3 marble-card">
+      <div class="flex items-center justify-between border-b border-roseGold-500/20 pb-2">
+        <span class="text-xs font-bold text-roseGold-400" data-i18n="chooseRep">اختر رقم التواصل</span>
+        <button onclick="toggleWhatsAppPopup()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <button onclick="openWhatsApp('905396506456')" class="w-full text-right p-2.5 rounded-xl bg-emeraldBg-950 hover:bg-roseGold-500/10 text-xs border border-roseGold-500/20">
+        <span class="font-bold text-white block" dir="ltr">+90 539 650 64 56</span>
+        <span class="text-[10px] text-gray-400" data-i18n="num1Label">المبيعات الرئيسية</span>
+      </button>
+      <button onclick="openWhatsApp('905453360691')" class="w-full text-right p-2.5 rounded-xl bg-emeraldBg-950 hover:bg-roseGold-500/10 text-xs border border-roseGold-500/20">
+        <span class="font-bold text-white block" dir="ltr">+90 545 336 06 91</span>
+        <span class="text-[10px] text-gray-400" data-i18n="num2Label">استشارات التصميم</span>
+      </button>
+      <button onclick="openWhatsApp('905551018000')" class="w-full text-right p-2.5 rounded-xl bg-emeraldBg-950 hover:bg-roseGold-500/10 text-xs border border-roseGold-500/20">
+        <span class="font-bold text-white block" dir="ltr">+90 555 101 80 00</span>
+        <span class="text-[10px] text-gray-400" data-i18n="num3Label">خدمة العملاء</span>
+      </button>
+    </div>
+
+    <button onclick="toggleWhatsAppPopup()" class="w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-2xl hover:scale-110 transition duration-300 border-2 border-roseGold-400">
+      <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </button>
+  </div>
+
+  <!-- MODAL 1: NO-CODE IMAGE MANAGER MODAL -->
+  <div id="imageManagerModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-emeraldBg-950 border border-roseGold-500/40 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-roseGold-500/20 pb-3">
+        <h3 class="text-lg font-bold text-roseGold-400" data-i18n="modalTitle">إدارة وتحديث صور الموقع فورياً</h3>
+        <button onclick="toggleModal('imageManagerModal')" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+      </div>
+
+      <p class="text-xs text-gray-300 leading-relaxed" data-i18n="modalInfo">
+        يمكنك تعديل روابط الصور أو استبدالها بمسارات مجلدك المحلي مثل `assets/images/sofa.jpg` وستحفظ تلقائياً دون الحاجة لتعديل الكود.
+      </p>
+
+      <div id="imageInputList" class="space-y-4">
+        <!-- Javascript renders inputs -->
+      </div>
+
+      <div class="pt-4 border-t border-roseGold-500/20 flex justify-end gap-3">
+        <button onclick="toggleModal('imageManagerModal')" class="px-4 py-2 rounded-xl text-xs bg-gray-800 text-gray-300">إغلاق</button>
+        <button onclick="applyNewImages()" class="px-5 py-2 rounded-xl text-xs font-bold bg-roseGold-500 text-emeraldBg-950 hover:bg-roseGold-400">حفظ وتحديث الصور</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: STEP-BY-STEP DEPLOYMENT & INSTALLATION GUIDE -->
+  <div id="installGuideModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-emeraldBg-950 border border-roseGold-500/40 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-roseGold-500/20 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-rocket text-roseGold-400 text-xl"></i>
+          <h3 class="text-lg font-bold text-roseGold-400" data-i18n="installGuideTitle">دليل التنصيب والنشر على Netlify و GitHub</h3>
+        </div>
+        <button onclick="toggleModal('installGuideModal')" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+      </div>
+
+      <div class="space-y-4 text-xs sm:text-sm text-gray-300">
+        
+        <div class="p-4 rounded-xl bg-emeraldBg-900 border border-roseGold-500/20 space-y-2">
+          <h4 class="font-bold text-roseGold-300 text-base">سبب ظاهرة الصفحة البيضاء والحل المباشر:</h4>
+          <p class="leading-relaxed">
+            تظهر الصفحة بيضاء عندما يتعذر على المتصفح العثور على ملفات الصور المسجلة في الروابط أو عند استخدام مسارات غير موجودة مثل <code class="text-roseGold-400 bg-black/40 px-1 rounded">assets/images/</code> بدون رفع الصور الفعلية إليها.
+          </p>
+        </div>
+
+        <h4 class="font-bold text-white text-base pt-2">الخطوات الشاملة للرفع والتنصيب:</h4>
+
+        <ol class="list-decimal list-inside space-y-3">
+          <li class="leading-relaxed">
+            <strong class="text-roseGold-400">إنشاء مجلد المشروع المحلي:</strong> أنشئ مجلداً جديداً على جهازك باسم <code class="bg-black/40 px-1 rounded text-roseGold-300">braina-home</code> وضغ بداخله هذا الملف باسم <code class="bg-black/40 px-1 rounded text-roseGold-300">index.html</code>.
+          </li>
+          <li class="leading-relaxed">
+            <strong class="text-roseGold-400">مجلد الصور assets:</strong> أنشئ مجلداً فرعياً داخل مشروعك بالمسار <code class="bg-black/40 px-1 rounded text-roseGold-300">assets/images/</code> وضغ بداخله كافة الصور التي تود استخدامها.
+          </li>
+          <li class="leading-relaxed">
+            <strong class="text-roseGold-400">الرفع على GitHub:</strong> قم برفع مجلد المشروع كاملاً إلى مستودعك (Repository) على GitHub بنفس الهيكلية تماماً.
+          </li>
+          <li class="leading-relaxed">
+            <strong class="text-roseGold-400">الربط والتحديث التلقائي مع Netlify:</strong>
+            ربط مستودع GitHub بـ Netlify سيضمن تحديث موقعك المباشر تلقائياً وبشكل فوري بمجرد رفع أي صور أو تعديلات جديدة.
+          </li>
+        </ol>
+
+      </div>
+
+      <div class="pt-4 border-t border-roseGold-500/20 flex justify-end">
+        <button onclick="toggleModal('installGuideModal')" class="px-6 py-2 rounded-xl text-xs font-bold bg-roseGold-500 text-emeraldBg-950 hover:bg-roseGold-400">فهمت، إغلاق الدليل</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- DICTIONARY & LOGIC SCRIPT -->
+  <script>
+    // ----------------------------------------------------
+    // TRANSLATIONS DICTIONARY
+    // ----------------------------------------------------
+    const i18n = {
+      ar: {
+        installGuideBtn: "خطوات التنصيب والنشر",
+        editImagesBtn: "إدارة الصور",
+        navHome: "الرئيسية",
+        navAbout: "عن Braina Home",
+        navCollections: "التشكيلات",
+        navLocation: "موقعنا",
+        navContact: "تواصل معنا",
+        ctaConsult: "استشارة واتساب",
+        heroBadge: "الفخامة والأناقة لبيتك الفاخر",
+        heroTitleLine1: "تصاميم استثنائية من",
+        heroTitleLine2: "BRAINA HOME",
+        heroDescription: "نقدم قطعاً فنية راقية تصمم خصيصاً لتناسب ذوقك الرفيع، مع أجود الخامات المخملية واللمسات الذهبية المتقنة على أسطح الرخام الفاخر.",
+        btnExplore: "استكشف المجموعة",
+        btnOrderDirect: "تواصل مباشر",
+        heroImageTag: "مجموعة صالونات 2026",
+        heroImageCaption: "طقم أريكة مخملية فاخرة مع تشطيبات مذهبة",
+        aboutSub: "علامة الفخامة",
+        aboutTitle: "عراقة الذوق ودقة التفاصيل",
+        aboutText1: "نحن في Braina Home نبتكر أحدث التصاميم العالمية برؤية فاخرة تدمج بين الجودة العالية واللمسات العصرية لتلبية تطلعات من يبحثون عن التميز والراحة.",
+        aboutText2: "نعتمد في جميع مجموعاتنا على الأنسجة الراقية كالمخمل والأخشاب الصلبة وأسطح الرخام الفاخرة مع اهتمام دقيق بالتشطيبات الذهبية المصقولة التي تضفي بهاءً استثنائياً.",
+        brandMotto: '"إبداع التصاميم الفاخرة التي تحول مساحاتك إلى تحفة فنية"',
+        feat1: "جودة فائقة",
+        feat2: "تصاميم خاصة",
+        feat3: "شحن وتوصيل",
+        catTitle: "تشكيلاتنا المتميزة",
+        catDesc: "استكشف أفخم المجموعات المصممة لتضفي رونقاً خاصاً على منزلك",
+        locTitle: "تفضل بزيارة معرضنا",
+        locSub: "يسعدنا استقبالكم في فرعنا للاطلاع على التشكيلات عن قرب",
+        contactInfo: "معلومات التواصل والموقع",
+        addressLabel: "العنوان الجغرافي",
+        webEmailLabel: "البريد والموقع الإلكتروني",
+        whatsappListTitle: "ممثلو الخدمة المباشرة عبر واتساب",
+        num1Label: "المبيعات الرئيسية",
+        num2Label: "استشارات التصميم",
+        num3Label: "خدمة العملاء",
+        chooseRep: "اختر رقم التواصل عبر الواتساب",
+        footerDesc: "علامة تجارية متخصصة في ابتكار أرقى تصاميم الأثاث المنزلي الفاخر والجودة العالية.",
+        footerLinks: "روابط السريعة",
+        footerContact: "معلومات التواصل",
+        footerFollow: "تابعنا",
+        modalTitle: "إدارة وتحديث صور الموقع فورياً",
+        modalInfo: "يمكنك تعديل روابط الصور أو استبدالها بمسارات مجلدك المحلي مثل assets/images/sofa.jpg وستحفظ تلقائياً دون الحاجة لتعديل الكود.",
+        installGuideTitle: "دليل التنصيب والنشر على Netlify و GitHub",
+        orderViaWA: "اطلب عبر الواتساب",
+        waGreetingMsg: "مرحباً فريق Braina Home، أود الاستفسار والتواصل معكم بخصوص التشكيلات والخدمات الفاخرة."
+      },
+      en: {
+        installGuideBtn: "Deployment Guide",
+        editImagesBtn: "Manage Images",
+        navHome: "Home",
+        navAbout: "About Braina Home",
+        navCollections: "Collections",
+        navLocation: "Location",
+        navContact: "Contact",
+        ctaConsult: "WhatsApp Consult",
+        heroBadge: "Luxury & Elegance For Your Residence",
+        heroTitleLine1: "Exceptional Designs By",
+        heroTitleLine2: "BRAINA HOME",
+        heroDescription: "We deliver refined luxury furniture tailored to your exquisite taste, featuring velvet textures and polished gold accents over fine marble surfaces.",
+        btnExplore: "Explore Collection",
+        btnOrderDirect: "Direct Contact",
+        heroImageTag: "2026 Living Collection",
+        heroImageCaption: "Royal Velvet Sofa Suite with Polished Gold Trims",
+        aboutSub: "Mark of Luxury",
+        aboutTitle: "Heritage of Sophistication & Detail",
+        aboutText1: "At Braina Home, we create world-class luxury interior designs, combining durability with modern aesthetics for those seeking pure distinction.",
+        aboutText2: "Our collections feature high-grade velvet, solid woods, and Calacatta marble elements with handcrafted brass trims that bring timeless grandeur to your living environment.",
+        brandMotto: '"Crafting bespoke luxury designs that turn your spaces into masterpieces"',
+        feat1: "Premium Quality",
+        feat2: "Custom Craft",
+        feat3: "Global Shipping",
+        catTitle: "Featured Collections",
+        catDesc: "Discover curated collections designed to impart timeless splendor to your home.",
+        locTitle: "Visit Our Showroom",
+        locSub: "We look forward to welcoming you to explore our luxury collections in person.",
+        contactInfo: "Contact & Location Info",
+        addressLabel: "Showroom Address",
+        webEmailLabel: "Email & Website",
+        whatsappListTitle: "Direct WhatsApp Representatives",
+        num1Label: "Main Sales Representative",
+        num2Label: "Design Consultation",
+        num3Label: "Customer Care",
+        chooseRep: "Select WhatsApp Representative",
+        footerDesc: "Specialized luxury brand bringing supreme quality, comfort, and distinction to your home.",
+        footerLinks: "Quick Links",
+        footerContact: "Contact Info",
+        footerFollow: "Follow Us",
+        modalTitle: "Instant Image URL Manager",
+        modalInfo: "Update hero banner and product image URLs in real-time or set local paths like assets/images/sofa.jpg.",
+        installGuideTitle: "GitHub & Netlify Deployment Guide",
+        orderViaWA: "Order via WhatsApp",
+        waGreetingMsg: "Hello Braina Home Team, I would like to inquire about your luxury furniture collections and services."
+      },
+      tr: {
+        installGuideBtn: "Kurulum Rehberi",
+        editImagesBtn: "Görselleri Yönet",
+        navHome: "Ana Sayfa",
+        navAbout: "Braina Home Hakkında",
+        navCollections: "Koleksiyonlar",
+        navLocation: "Konumumuz",
+        navContact: "İletişim",
+        ctaConsult: "WhatsApp Danışma",
+        heroBadge: "Eviniz İçin Lüks ve Zarafet",
+        heroTitleLine1: "Eşsiz Tasarımlar",
+        heroTitleLine2: "BRAINA HOME",
+        heroDescription: "Zevkinize özel olarak tasarlanan, kadife dokular, altın detaylar ve lüks mermer kaplamalarla işlenmiş mobilya koleksiyonlarımızı keşfedin.",
+        btnExplore: "Koleksiyonu İncele",
+        btnOrderDirect: "Doğrudan İletişim",
+        heroImageTag: "2026 Salon Koleksiyonu",
+        heroImageCaption: "Altın İşlemeli Özel Kadife Koltuk Takımı",
+        aboutSub: "Lüksün Adresi",
+        aboutTitle: "Zarafet Mirası ve İnce Detaylar",
+        aboutText1: "Braina Home olarak, üstün kaliteyi modern estetikle buluşturup yaşam alanlarınıza değer katan tasarımlar sunuyoruz.",
+        aboutText2: "Tüm koleksiyonlarımızda birinci sınıf kadife kumaşlar, mermer yüzeyler ve şık altın detaylar özenle işlenmektedir.",
+        brandMotto: '"Evinizi bir sanat eserine dönüştüren lüks tasarım ustalığı"',
+        feat1: "Üstün Kalite",
+        feat2: "Özel Tasarım",
+        feat3: "Hızlı Teslimat",
+        catTitle: "Özel Koleksiyonlarımız",
+        catDesc: "Evinize büyüleyici bir atmosfer katmak için tasarlanan koleksiyonlarımızı keşfedin.",
+        locTitle: "Mağazamızı Ziyaret Edin",
+        locSub: "Sizleri mağazamızda ağırlamaktan ve ürünlerimizi tanıtmaktan mutluluk duyarız.",
+        contactInfo: "İletişim ve Konum Bilgileri",
+        addressLabel: "Mağaza Adresi",
+        webEmailLabel: "E-posta ve Web",
+        whatsappListTitle: "Doğrudan WhatsApp Temsilcileri",
+        num1Label: "Ana Satış Temsilcisi",
+        num2Label: "Tasarım Danışmanlığı",
+        num3Label: "Müşteri Hizmetleri",
+        chooseRep: "WhatsApp Temsilcisi Seçin",
+        footerDesc: "Yaşam alanlarınıza estetik, konfor ve yüksek kalite katan lüks tasarım markası.",
+        footerLinks: "Hızlı Bağlantılar",
+        footerContact: "İletişim Bilgileri",
+        footerFollow: "Bizi Takip Edin",
+        modalTitle: "Anlık Görsel Yönetim Paneli",
+        modalInfo: "Görsel bağlantılarını veya assets/images/sofa.jpg gibi yerel yolları kod değiştirmeden anında güncelleyebilirsiniz.",
+        installGuideTitle: "GitHub ve Netlify Kurulum Rehberi",
+        orderViaWA: "WhatsApp ile Sipariş Ver",
+        waGreetingMsg: "Merhaba Braina Home Ekibi, lüks koleksiyonlarınız ve hizmetleriniz hakkında bilgi almak istiyorum."
+      }
+    };
+
+    // ----------------------------------------------------
+    // INITIAL PRODUCTS DATA
+    // ----------------------------------------------------
+    let products = JSON.parse(localStorage.getItem('braina_products')) || [
+      {
+        id: 1,
+        category: "living",
+        title: { ar: "طقم صالون الزمرد الملكي", en: "Royal Emerald Suite", tr: "Kraliyet Zümrüt Takımı" },
+        desc: { ar: "مخمل أخضر زمردي مع لمسات ذهبية فاخرة.", en: "Emerald green velvet with polished rose gold trims.", tr: "Zümrüt yeşili kadife ve altın detaylı özel tasarım." },
+        image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 2,
+        category: "dining",
+        title: { ar: "طاولة سفرة الرخام الذهبي", en: "Calacatta Gold Dining", tr: "Mermer Gold Yemek Odası" },
+        desc: { ar: "سطح رخامي إيطالي مع 8 مقاعد مخملية راقية.", en: "Italian marble dining table with 8 velvet chairs.", tr: "Lüks mermer masa ve 8 adet kadife sandalye." },
+        image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 3,
+        category: "bedroom",
+        title: { ar: "جناح نوم براينا الملكي", en: "Braina Royal Bedroom Suite", tr: "Braina Saray Yatak Odası" },
+        desc: { ar: "سرير كينج مخملي مع خزانة ملابس فاخرة.", en: "King upholstered velvet bed with master wardrobe.", tr: "Özel kadife başlıklı king boy yatak ve gardırop." },
+        image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 4,
+        category: "living",
+        title: { ar: "ركنة لاكجري المودرن", en: "Luxury Modern Lounge", tr: "Lüks Modern Köşe Takımı" },
+        desc: { ar: "تصميم مريح وفاخر يناسب أرقى مساحات الاستقبال.", en: "Ergonomic modern modular lounge with plush velvet.", tr: "Konforlu modüler tasarım ve yüksek kaliteli kadife." },
+        image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 5,
+        category: "dining",
+        title: { ar: "بوفيه ومرايا إيليجانس", en: "Elegance Buffet & Mirrors", tr: "Elegance Konsol ve Ayna" },
+        desc: { ar: "بوفيه رخامي مع مقابض وإطارات ذهبية مذهبة.", en: "Marble buffet sideboard with brushed gold detailing.", tr: "Altın detaylı lüks konsol ve duvar aynası." },
+        image: "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 6,
+        category: "bedroom",
+        title: { ar: "تسريحة دريسينج براينا هوم", en: "Braina Luxury Vanity Set", tr: "Braina Lüks Makyaj Masası" },
+        desc: { ar: "تسريحة مع إضاءة دافئة وأدراج ذات إغلاق هادئ.", en: "Luxury vanity set with warm LED lights and soft closure.", tr: "Aydınlatmalı özel aynalı makyaj masası." },
+        image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    let currentLang = 'ar';
+    let activeFilter = 'all';
+
+    // Page Load Setup
+    window.onload = function() {
+      renderProducts();
+      updateLanguageUI();
+
+      const savedHero = localStorage.getItem('braina_hero_img');
+      if(savedHero) {
+        document.getElementById('heroImage').src = savedHero;
+      }
+    };
+
+    // Render Products Grid
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+
+      const filtered = activeFilter === 'all' 
+        ? products 
+        : products.filter(p => p.category === activeFilter);
+
+      filtered.forEach(p => {
+        const item = document.createElement('div');
+        item.className = "rounded-2xl overflow-hidden shadow-xl flex flex-col group marble-card transition duration-300";
+        
+        const title = p.title[currentLang] || p.title.ar;
+        const desc = p.desc[currentLang] || p.desc.ar;
+
+        item.innerHTML = `
+          <div class="relative h-64 overflow-hidden bg-emeraldBg-900">
+            <img id="prod-img-${p.id}" src="${p.image}" alt="${title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-emeraldBg-950 via-transparent to-transparent opacity-70"></div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="text-xl font-serif font-bold text-white mb-2 group-hover:text-roseGold-300 transition">${title}</h3>
+              <p class="text-xs text-gray-300 leading-relaxed">${desc}</p>
+            </div>
+            <button onclick="openWhatsApp('905396506456', '${title}')" class="w-full bg-emeraldBg-900 hover:bg-roseGold-500 text-roseGold-400 hover:text-emeraldBg-950 border border-roseGold-500/40 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300 text-xs">
+              <i class="fa-brands fa-whatsapp text-base"></i>
+              <span>${i18n[currentLang].orderViaWA}</span>
+            </button>
+          </div>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    // Dynamic WhatsApp Link Generator with Pre-filled Welcome Message
+    function openWhatsApp(phone, itemTitle = '') {
+      let message = i18n[currentLang].waGreetingMsg;
+      if(itemTitle) {
+        if(currentLang === 'ar') message = `مرحباً Braina Home، أود الاستفسار عن: ${itemTitle}`;
+        else if(currentLang === 'en') message = `Hello Braina Home, I am interested in inquiring about: ${itemTitle}`;
+        else if(currentLang === 'tr') message = `Merhaba Braina Home, şu ürün hakkında bilgi almak istiyorum: ${itemTitle}`;
+      }
+      const encodedMsg = encodeURIComponent(message);
+      window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');
+    }
+
+    // Language Toggle Logic
+    function changeLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      ['ar', 'en', 'tr'].forEach(l => {
+        const btn = document.getElementById(`lang-${l}`);
+        if(l === lang) {
+          btn.className = "px-2 py-0.5 rounded text-xs font-bold text-roseGold-400 bg-emeraldBg-800";
+        } else {
+          btn.className = "px-2 py-0.5 rounded text-xs font-bold text-gray-300 hover:text-roseGold-400";
+        }
+      });
+
+      updateLanguageUI();
+      renderProducts();
+    }
+
+    function updateLanguageUI() {
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(i18n[currentLang] && i18n[currentLang][key]) {
+          el.textContent = i18n[currentLang][key];
+        }
+      });
+    }
+
+    // Category Filter Switch
+    function filterProducts(category) {
+      activeFilter = category;
+      ['all', 'living', 'dining', 'bedroom'].forEach(c => {
+        const btn = document.getElementById(`tab-${c}`);
+        if(c === category) {
+          btn.className = "filter-tab px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-roseGold-500 text-emeraldBg-950 shadow-md";
+        } else {
+          btn.className = "filter-tab px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-emeraldBg-900/80 text-gray-300 border border-roseGold-500/30 hover:text-roseGold-400";
+        }
+      });
+      renderProducts();
+    }
+
+    // UI Helpers
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    function toggleWhatsAppPopup() {
+      document.getElementById('whatsappPopup').classList.toggle('hidden');
+    }
+
+    function toggleModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.toggle('hidden');
+
+      if(modalId === 'imageManagerModal' && !modal.classList.contains('hidden')) {
+        const inputList = document.getElementById('imageInputList');
+        inputList.innerHTML = `
+          <div>
+            <label class="block text-xs text-roseGold-400 font-semibold mb-1">صورة الهيرو (Hero Image):</label>
+            <input type="text" id="input-hero-img" value="${document.getElementById('heroImage').src}" class="w-full bg-emeraldBg-900 border border-roseGold-500/30 rounded-lg p-2 text-xs text-white dir-ltr">
+          </div>
+          <div class="h-0.5 bg-roseGold-500/10 my-3"></div>
+        `;
+
+        products.forEach(p => {
+          inputList.innerHTML += `
+            <div>
+              <label class="block text-xs text-gray-300 font-semibold mb-1">${p.title.ar}:</label>
+              <input type="text" id="input-prod-${p.id}" value="${p.image}" class="w-full bg-emeraldBg-900 border border-roseGold-500/30 rounded-lg p-2 text-xs text-white dir-ltr">
+            </div>
+          `;
+        });
+      }
+    }
+
+    function applyNewImages() {
+      const heroUrl = document.getElementById('input-hero-img').value;
+      if(heroUrl) {
+        document.getElementById('heroImage').src = heroUrl;
+        localStorage.setItem('braina_hero_img', heroUrl);
+      }
+
+      products.forEach(p => {
+        const inp = document.getElementById(`input-prod-${p.id}`);
+        if(inp && inp.value) {
+          p.image = inp.value;
+        }
+      });
+
+      localStorage.setItem('braina_products', JSON.stringify(products));
+      renderProducts();
+      toggleModal('imageManagerModal');
+    }
+  </script>
+</body>
+</html>
