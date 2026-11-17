@@ -14,8 +14,68 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Marcellus&family=Montserrat:wght@400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* تنسيق شريط الإعلانات المؤقتة العلوي (الهوية الخضراء المخملية والذهبية) */
+    .bh-live-banner {
+      background-color: #0B3B24;
+      color: #ffffff;
+      padding: 12px 20px;
+      text-align: center;
+      font-family: inherit;
+      border-bottom: 2px solid #D4AF37;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1000;
+    }
+    .bh-live-badge {
+      background-color: #D4AF37;
+      color: #0B3B24;
+      font-weight: bold;
+      font-size: 0.85rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    /* تنسيق قسم الأرشيف الدائم في الموقع */
+    .bh-archive-section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 25px;
+      background-color: #f8faf9;
+      border-right: 4px solid #0B3B24;
+      border-radius: 8px;
+    }
+    .bh-archive-title {
+      color: #0B3B24;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+    .bh-archive-item {
+      padding: 12px 0;
+      border-bottom: 1px solid #e0e6e3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: #333;
+    }
+    .bh-archive-item:last-child {
+      border-bottom: none;
+    }
+    .bh-archive-date {
+      font-size: 0.85rem;
+      color: #5c7066;
+    }
+  </style>
 </head>
 <body>
+
+<!-- مكان ظهور الشريط المؤقت في أعلى الصفحة -->
+<div id="bh-top-announcements"></div>
 
 <header class="top">
   <a class="brand" href="#top" aria-label="Braina Home">
@@ -74,6 +134,16 @@
     </div>
   </section>
 
+  <!-- قسم الأرشيف الدائم (يظهر تلقائياً عندما تنتهي صلاحية أي إعلان مؤقت) -->
+  <section class="band marble">
+    <div class="wrap">
+      <div class="bh-archive-section" id="bh-archive-box" style="display: none;">
+        <h3 class="bh-archive-title">أرشيف الفعاليات والإعلانات — Braina Home</h3>
+        <div id="bh-archive-list"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="band marble" id="contact">
     <div class="wrap">
       <h2 data-i18n="contact.title"></h2>
@@ -118,5 +188,57 @@
 </dialog>
 
 <script src="app.js"></script>
+<script>
+  // جلب وقراءة ملف الإعلانات والأرشيف الخارجي تلقائياً
+  async function loadBrainaAnnouncements() {
+    try {
+      const response = await fetch('announcements.json?v=' + new Date().getTime());
+      if (!response.ok) return;
+      const brainaAnnouncements = await response.json();
+
+      const now = new Date();
+      const topContainer = document.getElementById("bh-top-announcements");
+      const archiveBox = document.getElementById("bh-archive-box");
+      const archiveList = document.getElementById("bh-archive-list");
+
+      if (!topContainer) return;
+
+      topContainer.innerHTML = "";
+      archiveList.innerHTML = "";
+      let hasArchived = false;
+
+      brainaAnnouncements.forEach(item => {
+        const expiryDate = new Date(item.expiresAt);
+
+        if (now < expiryDate) {
+          // عرض شريط التنويه المؤقت في الأعلى
+          topContainer.innerHTML += `
+            <div class="bh-live-banner">
+              <span class="bh-live-badge">${item.badge}</span>
+              <span>${item.text}</span>
+            </div>
+          `;
+        } else {
+          // نقل الإعلان المنتهي إلى الأرشيف الدائم
+          hasArchived = true;
+          archiveList.innerHTML += `
+            <div class="bh-archive-item">
+              <span><strong>[${item.badge}]</strong> ${item.text}</span>
+              <span class="bh-archive-date">${item.dateLabel}</span>
+            </div>
+          `;
+        }
+      });
+
+      if (hasArchived && archiveBox) {
+        archiveBox.style.display = "block";
+      }
+    } catch (error) {
+      console.error("تعذر تحميل التنويهات:", error);
+    }
+  }
+
+  loadBrainaAnnouncements();
+</script>
 </body>
 </html>
