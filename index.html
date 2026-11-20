@@ -240,5 +240,557 @@
 
   loadBrainaAnnouncements();
 </script>
-</body>
+</body><!-- بداية ويدجت دردشة Braina home المتزامن تلقائياً مع لغات الموقع (AR / TR / EN) -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
+
+  #bh-chat-wrapper {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 99999;
+    font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  #bh-chat-toggle {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0B3B2D 0%, #121212 100%);
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    margin-left: auto;
+  }
+
+  #bh-chat-toggle:hover {
+    transform: scale(1.07);
+    box-shadow: 0 12px 28px rgba(212, 175, 55, 0.25);
+  }
+
+  #bh-chat-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    background-color: #25D366;
+    border: 2px solid #121212;
+    border-radius: 50%;
+  }
+
+  #bh-chat-box {
+    display: none;
+    flex-direction: column;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    height: 510px;
+    max-height: calc(100vh - 110px);
+    background-color: #121212;
+    border: 1.5px solid #D4AF37;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+    margin-bottom: 14px;
+    animation: bhFadeIn 0.25s ease-out;
+  }
+
+  @keyframes bhFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .bh-chat-header {
+    background: linear-gradient(135deg, #0B3B2D 0%, #07261D 100%);
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .bh-header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bh-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #121212;
+    border: 1.5px solid #D4AF37;
+    color: #D4AF37;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .bh-header-text h4 {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .bh-header-text span {
+    font-size: 11.5px;
+    color: #D4AF37;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .bh-online-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #25D366;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .bh-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .bh-lang-switcher {
+    display: flex;
+    background-color: rgba(18, 18, 18, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .bh-lang-btn {
+    background: none;
+    border: none;
+    color: #CCCCCC;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .bh-lang-btn.active {
+    background-color: #D4AF37;
+    color: #121212;
+  }
+
+  #bh-close-btn {
+    background: none;
+    border: none;
+    color: #D4AF37;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 4px;
+  }
+
+  #bh-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #161616;
+  }
+
+  .bh-msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    word-wrap: break-word;
+  }
+
+  .bh-msg-bot {
+    background-color: #0B3B2D;
+    color: #F5F5F5;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    align-self: flex-start;
+  }
+
+  .bh-msg-user {
+    background-color: #D4AF37;
+    color: #121212;
+    font-weight: 500;
+    align-self: flex-end;
+  }
+
+  .bh-quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .bh-quick-btn {
+    background-color: #1E1E1E;
+    color: #D4AF37;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .bh-quick-btn:hover {
+    background-color: #D4AF37;
+    color: #121212;
+  }
+
+  .bh-wa-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 8px 13px;
+    background-color: #25D366;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    transition: background-color 0.2s;
+  }
+
+  .bh-wa-action:hover {
+    background-color: #1EBE5D;
+  }
+
+  .bh-chat-footer {
+    padding: 10px;
+    background-color: #121212;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    display: flex;
+    gap: 8px;
+  }
+
+  #bh-user-input {
+    flex: 1;
+    background-color: #1E1E1E;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 13.5px;
+    outline: none;
+  }
+
+  #bh-user-input:focus {
+    border-color: #D4AF37;
+  }
+
+  #bh-send-btn {
+    background-color: #D4AF37;
+    color: #121212;
+    border: none;
+    border-radius: 8px;
+    padding: 0 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  #bh-send-btn:hover {
+    opacity: 0.9;
+  }
+</style>
+
+<div id="bh-chat-wrapper">
+  <div id="bh-chat-box">
+    <div class="bh-chat-header">
+      <div class="bh-header-info">
+        <div class="bh-avatar">BH</div>
+        <div class="bh-header-text">
+          <h4>Braina home</h4>
+          <span><i class="bh-online-dot"></i> <span id="bh-status-text">مساعد خدمة العملاء</span></span>
+        </div>
+      </div>
+
+      <div class="bh-header-controls">
+        <div class="bh-lang-switcher">
+          <button class="bh-lang-btn" data-lang="ar" onclick="bhSetLanguage('ar')">AR</button>
+          <button class="bh-lang-btn" data-lang="tr" onclick="bhSetLanguage('tr')">TR</button>
+          <button class="bh-lang-btn" data-lang="en" onclick="bhSetLanguage('en')">EN</button>
+        </div>
+        <button id="bh-close-btn" aria-label="Close">&times;</button>
+      </div>
+    </div>
+
+    <div id="bh-messages"></div>
+
+    <div class="bh-chat-footer">
+      <input type="text" id="bh-user-input" onkeypress="if(event.key==='Enter') bhSendMessage()">
+      <button id="bh-send-btn" onclick="bhSendMessage()"></button>
+    </div>
+  </div>
+
+  <button id="bh-chat-toggle" aria-label="Open Chat">
+    <span id="bh-chat-badge"></span>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+</div>
+
+<script>
+  const BH_WHATSAPP_NUMBER = "905396506456";
+
+  const BH_DATA = {
+    ar: {
+      dir: "rtl",
+      status: "مساعد خدمة العملاء",
+      placeholder: "اكتب استفسارك هنا...",
+      send: "إرسال",
+      waBtn: "📲 المتابعة على واتساب الآن",
+      welcome: "أهلاً بك في <strong>Braina home</strong> للأثاث والديكور الفاخر ✨<br>كيف يمكننا مساعدتك اليوم؟ اختر من القائمة أو اكتب سؤالك:",
+      quick: [
+        { key: "custom", label: "🛋️ تفصيل حسب الطلب" },
+        { key: "price", label: "💰 الأسعار والعروض" },
+        { key: "location", label: "📍 موقعنا والتوصيل" },
+        { key: "whatsapp", label: "💬 محادثة واتساب" }
+      ],
+      replies: {
+        custom: {
+          text: "في <strong>Braina home</strong> ننفذ جميع قطع الأثاث والديكورات الخشبية حسب المقاسات والألوان التي تناسب مساحتك بأجود الخامات.<br>أرسل لنا صورة أو مقاسات الغرفة على واتساب وسنزودك بالتفاصيل فوراً:",
+          wa: "مرحباً Braina home، أرغب بالاستفسار عن تفصيل أثاث حسب الطلب."
+        },
+        price: {
+          text: "تختلف الأسعار حسب المقاسات ونوع القماش أو الرخام والخشب المختار. يسعدنا إرسال الكتالوج وقائمة الأسعار المحدثة لك عبر واتساب:",
+          wa: "مرحباً Braina home، ممكن تزويدي بالكتالوج والأسعار؟"
+        },
+        location: {
+          text: "موقعنا في <strong>إسطنبول - عمرانية (Altınşehir, Ümraniye)</strong>، ونوفر خدمة التوصيل والتركيب لكافة مناطق إسطنبول مع إمكانية الشحن.<br>تواصل معنا للحصول على الموقع الدقيق:",
+          wa: "مرحباً Braina home، أرغب بمعرفة عنوان المعرض وتفاصيل التوصيل."
+        },
+        whatsapp: {
+          text: "يسعد فريقنا بخدمتك مباشرة على واتساب للإجابة على جميع استفساراتك:",
+          wa: "مرحباً Braina home، لدي استفسار بخصوص منتجاتكم."
+        },
+        fallback: (q) => ({
+          text: "شكراً لتواصلك مع <strong>Braina home</strong>! لضمان إعطائك أدق التفاصيل حول طلبك، يمكنك التحدث مباشرة مع فريق المبيعات عبر واتساب بنقرة واحدة:",
+          wa: `مرحباً Braina home، استفساري هو: ${q}`
+        })
+      }
+    },
+    tr: {
+      dir: "ltr",
+      status: "Müşteri Hizmetleri",
+      placeholder: "Sorunuzu buraya yazın...",
+      send: "Gönder",
+      waBtn: "📲 WhatsApp'ta Devam Et",
+      welcome: "<strong>Braina home</strong> lüks mobilya ve dekorasyon dünyasına hoş geldiniz ✨<br>Size nasıl yardımcı olabiliriz? Bir seçenek seçin veya sorunuzu yazın:",
+      quick: [
+        { key: "custom", label: "🛋️ Özel Ölçü Üretim" },
+        { key: "price", label: "💰 Fiyatlar & Katalog" },
+        { key: "location", label: "📍 Konum & Teslimat" },
+        { key: "whatsapp", label: "💬 WhatsApp Sohbet" }
+      ],
+      replies: {
+        custom: {
+          text: "<strong>Braina home</strong> olarak yaşam alanınıza özel ölçü, renk ve birinci sınıf malzemelerle özel mobilya üretimi yapıyoruz.<br>Oda ölçülerinizi veya beğendiğiniz modeli WhatsApp'tan gönderin, hemen fiyatlandıralım:",
+          wa: "Merhaba Braina home, özel ölçü mobilya üretimi hakkında bilgi almak istiyorum."
+        },
+        price: {
+          text: "Fiyatlarımız seçilen ölçü, kumaş, mermer ve ahşap detaylarına göre değişmektedir. Güncel kataloğumuzu ve fiyat listemizi WhatsApp üzerinden paylaşabiliriz:",
+          wa: "Merhaba Braina home, güncel katalog ve fiyat listesini alabilir miyim?"
+        },
+        location: {
+          text: "Mağazamız <strong>Altınşehir, Ümraniye / İstanbul</strong>'dadır. Tüm İstanbul'a teslimat ve kurulum hizmetimiz mevcuttur.<br>Konum bilgisi için bizimle iletişime geçin:",
+          wa: "Merhaba Braina home, mağaza adresiniz ve teslimat detayları hakkında bilgi alabilir miyim?"
+        },
+        whatsapp: {
+          text: "Satış ekibimiz tüm sorularınızı yanıtlamak için WhatsApp'ta sizi bekliyor:",
+          wa: "Merhaba Braina home, ürünleriniz hakkında bilgi almak istiyorum."
+        },
+        fallback: (q) => ({
+          text: "<strong>Braina home</strong> ile iletişime geçtiğiniz için teşekkürler! Talebinizle ilgili en doğru bilgiyi almak için satış ekibimize tek tıkla WhatsApp'tan ulaşabilirsiniz:",
+          wa: `Merhaba Braina home, sorum şu: ${q}`
+        })
+      }
+    },
+    en: {
+      dir: "ltr",
+      status: "Customer Support",
+      placeholder: "Type your inquiry here...",
+      send: "Send",
+      waBtn: "📲 Continue on WhatsApp",
+      welcome: "Welcome to <strong>Braina home</strong> Luxury Furniture & Decor ✨<br>How can we assist you today? Choose an option or type your question:",
+      quick: [
+        { key: "custom", label: "🛋️ Custom Furniture" },
+        { key: "price", label: "💰 Prices & Catalog" },
+        { key: "location", label: "📍 Location & Delivery" },
+        { key: "whatsapp", label: "💬 WhatsApp Chat" }
+      ],
+      replies: {
+        custom: {
+          text: "At <strong>Braina home</strong>, we craft bespoke furniture and custom woodwork tailored to your exact dimensions, colors, and premium materials.<br>Send us your room dimensions or inspiration photo on WhatsApp:",
+          wa: "Hello Braina home, I would like to inquire about custom-made furniture."
+        },
+        price: {
+          text: "Prices vary based on dimensions and your choice of fabrics, marble, and wood finishes. We would love to share our latest catalog and price list via WhatsApp:",
+          wa: "Hello Braina home, could you please share your catalog and price list?"
+        },
+        location: {
+          text: "We are located in <strong>Altınşehir, Ümraniye, Istanbul</strong>, offering delivery and installation across all of Istanbul as well as shipping options.<br>Contact us for the exact pin location:",
+          wa: "Hello Braina home, I would like to know your showroom location and delivery details."
+        },
+        whatsapp: {
+          text: "Our team is ready to assist you directly on WhatsApp for any inquiries:",
+          wa: "Hello Braina home, I have an inquiry regarding your furniture."
+        },
+        fallback: (q) => ({
+          text: "Thank you for reaching out to <strong>Braina home</strong>! For accurate details regarding your request, connect directly with our sales team on WhatsApp in one click:",
+          wa: `Hello Braina home, my inquiry is: ${q}`
+        })
+      }
+    }
+  };
+
+  let currentLang = "ar";
+  const chatBox = document.getElementById("bh-chat-box");
+  const toggleBtn = document.getElementById("bh-chat-toggle");
+  const closeBtn = document.getElementById("bh-close-btn");
+  const messagesDiv = document.getElementById("bh-messages");
+  const userInput = document.getElementById("bh-user-input");
+
+  function bhDetectSiteLanguage() {
+    const htmlLang = (document.documentElement.lang || "").toLowerCase();
+    const savedLang = (localStorage.getItem("lang") || localStorage.getItem("language") || "").toLowerCase();
+    const detected = htmlLang || savedLang || (navigator.language || "").toLowerCase();
+
+    if (detected.startsWith("tr")) return "tr";
+    if (detected.startsWith("en")) return "en";
+    return "ar";
+  }
+
+  function bhSetLanguage(lang) {
+    if (!BH_DATA[lang]) lang = "ar";
+    currentLang = lang;
+    const config = BH_DATA[lang];
+
+    chatBox.style.direction = config.dir;
+    document.getElementById("bh-status-text").textContent = config.status;
+    userInput.placeholder = config.placeholder;
+    document.getElementById("bh-send-btn").textContent = config.send;
+
+    document.querySelectorAll(".bh-lang-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+
+    messagesDiv.innerHTML = "";
+    bhAppendMessage(config.welcome, false);
+
+    const quickContainer = document.createElement("div");
+    quickContainer.className = "bh-quick-replies";
+    config.quick.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "bh-quick-btn";
+      btn.textContent = item.label;
+      btn.onclick = () => bhHandleQuick(item.key, item.label);
+      quickContainer.appendChild(btn);
+    });
+    messagesDiv.appendChild(quickContainer);
+  }
+
+  function bhAppendMessage(text, isUser = false, waText = null) {
+    const config = BH_DATA[currentLang];
+    const msgEl = document.createElement("div");
+    msgEl.className = `bh-msg ${isUser ? "bh-msg-user" : "bh-msg-bot"}`;
+    msgEl.innerHTML = text;
+
+    if (waText) {
+      const waLink = document.createElement("a");
+      waLink.className = "bh-wa-action";
+      waLink.href = `https://wa.me/${BH_WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
+      waLink.target = "_blank";
+      waLink.rel = "noopener noreferrer";
+      waLink.textContent = config.waBtn;
+      msgEl.appendChild(document.createElement("br"));
+      msgEl.appendChild(waLink);
+    }
+
+    messagesDiv.appendChild(msgEl);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+
+  function bhMatchIntent(query) {
+    const q = query.toLowerCase();
+    if (/(تفصيل|مقاس|تصميم|خشب|özel|ölçü|tasarım|ahşap|custom|bespoke|size|wood)/.test(q)) return "custom";
+    if (/(سعر|أسعار|تكلفة|عروض|بكم|fiyat|katalog|teklif|kampanya|price|cost|catalog|quote)/.test(q)) return "price";
+    if (/(موقع|عنوان|توصيل|شحن|اسطنبول|konum|adres|teslimat|kargo|istanbul|ümraniye|location|address|delivery|shipping)/.test(q)) return "location";
+    if (/(واتساب|تواصل|رقم|مباشر|whatsapp|iletişim|numara|contact|chat)/.test(q)) return "whatsapp";
+    return null;
+  }
+
+  function bhHandleQuick(key, label) {
+    bhAppendMessage(label, true);
+    const reply = BH_DATA[currentLang].replies[key];
+    setTimeout(() => {
+      bhAppendMessage(reply.text, false, reply.wa);
+    }, 300);
+  }
+
+  function bhSendMessage() {
+    const text = userInput.value.trim();
+    if (!text) return;
+    bhAppendMessage(text, true);
+    userInput.value = "";
+
+    const intent = bhMatchIntent(text);
+    const replies = BH_DATA[currentLang].replies;
+    const reply = intent ? replies[intent] : replies.fallback(text);
+
+    setTimeout(() => {
+      bhAppendMessage(reply.text, false, reply.wa);
+    }, 350);
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    chatBox.style.display = chatBox.style.display === "flex" ? "none" : "flex";
+  });
+
+  closeBtn.addEventListener("click", () => {
+    chatBox.style.display = "none";
+  });
+
+  // 1. ضبط اللغة المبدئية
+  bhSetLanguage(bhDetectSiteLanguage());
+
+  // 2. مراقبة تغيير لغة الصفحة تلقائياً عند ضغط الزائر على أزرار لغات الموقع
+  const bhLangObserver = new MutationObserver(() => {
+    const newSiteLang = bhDetectSiteLanguage();
+    if (newSiteLang !== currentLang) {
+      bhSetLanguage(newSiteLang);
+    }
+  });
+  bhLangObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["lang", "dir"]
+  });
+</script>
+<!-- نهاية ويدجت دردشة Braina home -->
+
 </html>
